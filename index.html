@@ -18,7 +18,9 @@
 <link rel="apple-touch-icon" href="/assets/studio/img/apple-touch-icon.png">
 <link rel="preload" href="/assets/studio/fonts/BarlowCondensed-700.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/assets/studio/studio.css">
+<link rel="stylesheet" href="/assets/studio/fx.css">
 <script src="/assets/studio/studio.js" defer></script>
+<script src="/assets/studio/fx.js" defer></script>
 </head>
 <body data-studio>
 <a class="skip" href="#main">Skip to content</a>
@@ -37,9 +39,10 @@
 <main id="main">
 
   <section class="hero">
+    <div class="hero-glow" aria-hidden="true"></div>
     <div class="wrap">
-      <div>
-        <h1 class="rise">Indie games and the <em>music</em> behind them.</h1>
+      <div class="hero-copy">
+        <h1 class="kinetic"><span class="w"><span style="--wi:0">Indie</span></span> <span class="w"><span style="--wi:1">games</span></span> <span class="w"><span style="--wi:2">and</span></span> <span class="w"><span style="--wi:3">the</span></span> <span class="w"><span style="--wi:4"><em>music</em></span></span> <span class="w"><span style="--wi:5">behind</span></span> <span class="w"><span style="--wi:6">them.</span></span></h1>
         <p class="lede rise" style="--i:1">Incognito Generation is an independent studio making games for phones, PC and the living room, and releasing its own music since 2021.</p>
         <div class="btn-row rise" style="--i:2">
           <a class="btn" href="/games/">See the games</a>
@@ -47,12 +50,14 @@
         </div>
       </div>
       <div class="collage rise" style="--i:2" aria-hidden="true">
-        <figure class="c1"><img src="/assets/studio/img/games/final-stand/key-art.jpg" alt="" fetchpriority="high"></figure>
-        <figure class="c2"><img src="/assets/studio/img/games/little-secrets/hero-library.jpg" alt=""></figure>
-        <figure class="c3"><img src="/assets/studio/img/games/springbound/icon.png" alt=""></figure>
+        <div class="layer" style="--d:10"><figure class="c1"><img src="/assets/studio/img/games/final-stand/key-art.jpg" alt="" fetchpriority="high"></figure></div>
+        <div class="layer" style="--d:24"><figure class="c2"><img src="/assets/studio/img/games/little-secrets/hero-library.jpg" alt=""></figure></div>
+        <div class="layer" style="--d:40"><figure class="c3"><img src="/assets/studio/img/games/springbound/icon.png" alt=""></figure></div>
       </div>
     </div>
   </section>
+
+  <div class="marquee" aria-hidden="true"><div class="track-m"><div class="grp"><span>Final Stand</span><img src="/assets/studio/img/emblem.png" alt=""><span>Koi No Hajimari</span><img src="/assets/studio/img/emblem.png" alt=""><span>Slicing Life</span><img src="/assets/studio/img/emblem.png" alt=""><span>Samurai Spirit</span><img src="/assets/studio/img/emblem.png" alt=""><span>Springbound</span><img src="/assets/studio/img/emblem.png" alt=""><span>Macabre Life</span><img src="/assets/studio/img/emblem.png" alt=""><span>Little Secrets</span><img src="/assets/studio/img/emblem.png" alt=""><span>Inauguration</span><img src="/assets/studio/img/emblem.png" alt=""><span>Elemental Arena</span><img src="/assets/studio/img/emblem.png" alt=""><span>Pose Runner</span><img src="/assets/studio/img/emblem.png" alt=""></div><div class="grp"><span>Final Stand</span><img src="/assets/studio/img/emblem.png" alt=""><span>Koi No Hajimari</span><img src="/assets/studio/img/emblem.png" alt=""><span>Slicing Life</span><img src="/assets/studio/img/emblem.png" alt=""><span>Samurai Spirit</span><img src="/assets/studio/img/emblem.png" alt=""><span>Springbound</span><img src="/assets/studio/img/emblem.png" alt=""><span>Macabre Life</span><img src="/assets/studio/img/emblem.png" alt=""><span>Little Secrets</span><img src="/assets/studio/img/emblem.png" alt=""><span>Inauguration</span><img src="/assets/studio/img/emblem.png" alt=""><span>Elemental Arena</span><img src="/assets/studio/img/emblem.png" alt=""><span>Pose Runner</span><img src="/assets/studio/img/emblem.png" alt=""></div></div></div>
 
   <section id="games" aria-labelledby="games-h">
     <div class="wrap">
@@ -151,6 +156,7 @@
 
 </main>
 <footer class="site">
+  <div class="mega" aria-hidden="true"><span>Incognito Generation</span></div>
   <div class="wrap">
     <div class="about-col">
       <a class="brand" href="/"><img src="/assets/studio/img/emblem.png" alt="" width="34" height="34"><span>Incognito Generation</span></a>

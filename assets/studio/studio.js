@@ -48,6 +48,8 @@
   /* --------------------------------------------------------------- player */
   const audio = new Audio();
   audio.preload = "none";
+  audio.crossOrigin = "anonymous"; // Apple previews send CORS headers; lets fx.js read the spectrum
+  window.IG = { audio };
   let current = -1;
   let playerEl = null;
 
@@ -110,6 +112,7 @@
       el.classList.toggle("paused", !!on && !playing);
       if (el.matches(".track")) el.setAttribute("aria-pressed", on && playing ? "true" : "false");
     });
+    document.dispatchEvent(new CustomEvent("ig:state", { detail: { release: now ? now.release.id : null, playing } }));
     document.querySelectorAll("[data-release-play]").forEach((el) => {
       const on = now && String(now.release.id) === el.dataset.releasePlay && playing;
       el.innerHTML = on ? ICON.pause : ICON.play;
@@ -356,12 +359,14 @@
     initContact(root);
     observeReveals(root);
     syncButtons();
+    if (root !== document) document.dispatchEvent(new CustomEvent("ig:page", { detail: { root } }));
   }
 
   /* ---------------------------------------------- in-place navigation */
   // Studio pages swap <main> in place so the music never stops.
   const isStudio = (url) => url.origin === location.origin && STUDIO_PATHS.includes(url.pathname);
   async function go(url, push = true) {
+    const leaving = window.IGfx && !reduceMotion ? window.IGfx.leave() : null; // curtain runs while the page loads
     try {
       const res = await fetch(url.pathname + url.search, { headers: { Accept: "text/html" } });
       if (!res.ok) throw 0;
@@ -382,7 +387,9 @@
         next.setAttribute("tabindex", "-1");
         next.focus({ preventScroll: true });
       };
-      if (document.startViewTransition && !reduceMotion) document.startViewTransition(swap); else swap();
+      if (leaving) { await leaving; swap(); window.IGfx.enter(); }
+      else if (document.startViewTransition && !reduceMotion) document.startViewTransition(swap);
+      else swap();
     } catch {
       location.href = url.href;
     }

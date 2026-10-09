@@ -1,0 +1,181 @@
+/* Incognito Generation: motion layer.
+   Everything here is decoration on top of studio.css and switches off under
+   prefers-reduced-motion. Scroll effects use CSS scroll-driven animations
+   where supported, and simply stay static elsewhere. */
+
+/* ---------- film grain (fixed, non-interactive) ---------- */
+.grain {
+  position: fixed; inset: -50%; z-index: 60; pointer-events: none; opacity: .06;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .grain { opacity: .035; } }
+
+/* ---------- scroll progress ---------- */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 45; pointer-events: none; transform-origin: 0 50%; transform: scaleX(0); background: var(--accent); }
+
+/* ---------- hero glow that breathes with the music ---------- */
+.hero { isolation: isolate; }
+.hero-glow {
+  position: absolute; z-index: -1; pointer-events: none;
+  width: min(900px, 90vw); aspect-ratio: 1; right: -12%; top: 50%;
+  translate: 0 -50%; border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--accent) 34%, transparent), transparent 70%);
+  opacity: calc(.45 + var(--beat, 0) * .55);
+  scale: calc(1 + var(--beat, 0) * .12);
+  filter: blur(20px);
+  transition: opacity .12s linear, scale .12s linear;
+}
+
+/* ---------- kinetic headline ---------- */
+.kinetic .w { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .06em; margin-bottom: -.06em; }
+.kinetic .w > span { display: inline-block; }
+
+/* ---------- parallax collage ---------- */
+.collage { perspective: 1200px; }
+.collage .layer { position: absolute; inset: 0; will-change: transform; transform: translate3d(calc(var(--px, 0) * var(--d, 0) * 1px), calc(var(--py, 0) * var(--d, 0) * 1px), 0); transition: transform .6s cubic-bezier(.16, 1, .3, 1); }
+.collage .layer figure { pointer-events: none; }
+
+/* ---------- marquee ---------- */
+.marquee { border-block: 1px solid var(--line); overflow: hidden; padding: 22px 0; user-select: none; position: relative; }
+.marquee::before, .marquee::after { content: ""; position: absolute; top: 0; bottom: 0; width: 12vw; z-index: 1; pointer-events: none; }
+.marquee::before { left: 0; background: linear-gradient(90deg, var(--bg), transparent); }
+.marquee::after { right: 0; background: linear-gradient(-90deg, var(--bg), transparent); }
+.marquee .track-m { display: flex; width: max-content; gap: 0; }
+.marquee .grp { display: flex; align-items: center; gap: clamp(28px, 4vw, 56px); padding-right: clamp(28px, 4vw, 56px); }
+.marquee .grp span {
+  font-family: var(--display); font-weight: 700; text-transform: uppercase; white-space: nowrap;
+  font-size: clamp(2.4rem, 6vw, 5rem); line-height: 1; letter-spacing: -.005em;
+  color: transparent; -webkit-text-stroke: 1.2px color-mix(in srgb, var(--text) 55%, transparent);
+  transition: color .3s, -webkit-text-stroke-color .3s;
+}
+.marquee .grp span:hover { color: var(--accent); -webkit-text-stroke-color: var(--accent); }
+.marquee .grp img { width: clamp(28px, 3.4vw, 44px); height: auto; opacity: .55; flex: none; }
+@media (prefers-color-scheme: light) { :root:not([data-theme="dark"]) .marquee .grp img { filter: invert(1); } }
+
+/* ---------- tiles: tilt + spotlight ---------- */
+.tile { transform-style: preserve-3d; transition: transform .5s cubic-bezier(.16, 1, .3, 1), box-shadow .5s; }
+.tile.tilting { transition: transform .08s linear, box-shadow .5s; box-shadow: 0 30px 60px -28px rgba(0,0,0,.75); }
+.tile .spot { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0; transition: opacity .35s;
+  background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), rgba(255,255,255,.14), transparent 60%); mix-blend-mode: soft-light; }
+.tile:hover .spot { opacity: 1; }
+.tile .body { position: relative; z-index: 1; transform: translateZ(30px); }
+.tile .status { transition: letter-spacing .4s cubic-bezier(.16, 1, .3, 1); }
+.tile:hover .status { letter-spacing: .16em; }
+
+/* ---------- heading wipe ---------- */
+.wipe { clip-path: inset(0 0 100% 0); transform: translateY(.35em); transition: clip-path 1s cubic-bezier(.16, 1, .3, 1), transform 1s cubic-bezier(.16, 1, .3, 1); }
+.wipe.in { clip-path: inset(0 0 -10% 0); transform: none; }
+
+/* ---------- vinyl that slides out of a playing cover ---------- */
+.cover.has-disc { overflow: visible; width: 78%; }
+.cover.has-disc .big-play { z-index: 3; }
+.cover.has-disc > img { position: relative; z-index: 2; border-radius: var(--r); }
+.disc {
+  position: absolute; z-index: 1; top: 4%; left: 4%; width: 92%; aspect-ratio: 1; border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--accent) 0 14%, #111 14.5% 16%, transparent 16.5%),
+    repeating-radial-gradient(circle, #151517 0 2px, #1d1d20 2px 3px),
+    #121214;
+  box-shadow: 0 20px 50px -18px rgba(0,0,0,.8), inset 0 0 0 1px rgba(255,255,255,.05);
+  transition: translate .9s cubic-bezier(.16, 1, .3, 1);
+}
+.disc::after { content: ""; position: absolute; inset: 0; border-radius: 50%; background: conic-gradient(from 30deg, transparent 0 20%, rgba(255,255,255,.08) 25%, transparent 32% 70%, rgba(255,255,255,.06) 75%, transparent 82%); }
+.disc i { position: absolute; inset: 42.5%; border-radius: 50%; background-size: cover; background-position: center; }
+.playing-cover .disc { translate: 27% 0; }
+.playing-cover .disc.spin { animation: spin 3.2s linear infinite; }
+@keyframes spin { to { rotate: 360deg; } }
+.paused-cover .disc.spin { animation-play-state: paused; }
+
+/* big play button pulses with the beat */
+.cover .big-play { scale: calc(1 + var(--beat, 0) * .14); transition: transform .25s cubic-bezier(.16, 1, .3, 1), scale .1s linear; }
+.cover .big-play::after { content: ""; position: absolute; inset: -6px; border-radius: 50%; border: 2px solid var(--accent); opacity: calc(var(--beat, 0) * .9); scale: calc(1 + var(--beat, 0) * .35); pointer-events: none; }
+
+/* ---------- player visualizer ---------- */
+.player { overflow: hidden; }
+.player canvas.viz { position: absolute; inset: 0; width: 100%; height: 100%; z-index: -1; opacity: .5; pointer-events: none; }
+
+/* ---------- magnetic buttons ---------- */
+.btn.mag { transition: transform .45s cubic-bezier(.16, 1, .3, 1), background .25s, border-color .25s, color .25s; }
+
+/* ---------- footer wordmark ---------- */
+.mega { overflow: hidden; margin: -48px 0 40px; padding-top: clamp(16px, 3vw, 36px); }
+.mega span {
+  display: block; text-align: center; white-space: nowrap;
+  font-family: var(--display); font-weight: 700; text-transform: uppercase; line-height: .82;
+  font-size: clamp(2.6rem, 11.4vw, 13.5rem); letter-spacing: -.02em;
+  color: transparent; -webkit-text-stroke: 1.5px color-mix(in srgb, var(--text) 30%, transparent);
+  background: linear-gradient(90deg, var(--text), var(--text)) 0 0 / var(--fill, 0%) 100% no-repeat;
+  -webkit-background-clip: text; background-clip: text;
+  translate: 0 12%;
+}
+
+/* ---------- page transition: accent curtain ---------- */
+.curtain { position: fixed; inset: 0; z-index: 80; pointer-events: none; display: grid; place-items: center; background: var(--accent); transform: translateY(100%); }
+.curtain img { width: 84px; opacity: 0; filter: brightness(0); }
+.curtain.cover-in { animation: curtain-in .42s cubic-bezier(.7, 0, .3, 1) forwards; }
+.curtain.cover-in img { animation: emblem-in .42s ease forwards; }
+.curtain.cover-out { transform: none; animation: curtain-out .55s cubic-bezier(.7, 0, .3, 1) forwards; }
+.curtain.cover-out img { opacity: 1; animation: emblem-out .3s ease forwards; }
+@keyframes curtain-in { from { transform: translateY(100%); } to { transform: translateY(0); } }
+@keyframes curtain-out { from { transform: translateY(0); } to { transform: translateY(-100%); } }
+@keyframes emblem-in { 60% { opacity: 0; transform: scale(.8); } to { opacity: 1; transform: none; } }
+@keyframes emblem-out { to { opacity: 0; transform: scale(1.1); } }
+
+/* ================= motion ON ================= */
+@media (prefers-reduced-motion: no-preference) {
+  .kinetic .w > span { transform: translateY(105%); animation: word-up .9s cubic-bezier(.16, 1, .3, 1) forwards; animation-delay: calc(var(--wi) * 70ms + 80ms); }
+  @keyframes word-up { to { transform: none; } }
+
+  .marquee .track-m { animation: marquee 38s linear infinite; }
+  .marquee:hover .track-m { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  .grain { animation: grain 1.2s steps(6) infinite; }
+  @keyframes grain { 0% { transform: translate(0, 0); } 20% { transform: translate(-3%, 2%); } 40% { transform: translate(2%, -3%); } 60% { transform: translate(-2%, -1%); } 80% { transform: translate(3%, 3%); } 100% { transform: translate(0, 0); } }
+
+  @supports (animation-timeline: scroll()) {
+    .progress { animation: grow linear both; animation-timeline: scroll(root); }
+    @keyframes grow { to { transform: scaleX(1); } }
+
+    /* hero collage drifts at different depths as you scroll away */
+    .collage .c1 { animation: drift-a linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    .collage .c2 { animation: drift-b linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    .collage .c3 { animation: drift-c linear both; animation-timeline: scroll(root); animation-range: 0 90vh; }
+    .hero-copy { animation: lift linear both; animation-timeline: scroll(root); animation-range: 0 80vh; }
+    @keyframes drift-a { to { transform: translateY(-60px) scale(1.04); } }
+    @keyframes drift-b { to { transform: translateY(-150px) rotate(-3deg); } }
+    @keyframes drift-c { to { transform: translateY(-240px) rotate(8deg); } }
+    @keyframes lift { to { transform: translateY(-40px); opacity: .25; } }
+
+    /* image parallax inside tiles, key art and covers */
+    .tile img.bg, .game-media .key img {
+      animation: inner-pan linear both; animation-timeline: view(); animation-range: cover;
+      scale: 1.14;
+    }
+    .tile:hover img.bg { transform: none; scale: 1.2; transition: scale 1.2s cubic-bezier(.16, 1, .3, 1); }
+    @keyframes inner-pan { from { translate: 0 -6%; } to { translate: 0 6%; } }
+
+    .thumbs img { animation: rise-in linear both; animation-timeline: view(); animation-range: entry 0% entry 80%; }
+    @keyframes rise-in { from { opacity: 0; transform: translateY(40px) scale(.96); } to { opacity: 1; transform: none; } }
+
+    .mega span { animation: fill linear both; animation-timeline: view(); animation-range: entry 0% entry 100%; }
+    @keyframes fill { from { --fill: 0%; translate: 0 45%; } to { --fill: 100%; translate: 0 12%; } }
+
+    .shelf button { animation: shelf-in linear both; animation-timeline: view(inline); animation-range: entry 0% entry 100%; }
+    @keyframes shelf-in { from { opacity: .2; transform: scale(.88) rotate(-2deg); } to { opacity: 1; transform: none; } }
+  }
+}
+@property --fill { syntax: "<percentage>"; inherits: false; initial-value: 0%; }
+
+/* ================= motion OFF ================= */
+@media (prefers-reduced-motion: reduce) {
+  .wipe { clip-path: none; transform: none; }
+  .collage .layer { transform: none !important; }
+  .hero-glow { transition: none; scale: 1; }
+  .mega span { --fill: 100%; }
+  .curtain { display: none; }
+  .disc { transition: none; }
+}
+
+/* view-transition: keep the swap itself crisp, the curtain does the drama */
+::view-transition-old(root), ::view-transition-new(root) { animation: none; }
