@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Elemental Arena | Incognito Generation</title>
+<meta name="description" content="Elemental Arena: a palm-sized voice puck with two lives. An AI companion that talks, feels and remembers, and a fighter that duels other players by voice. Winner, Robotics &amp; Physical AI track, Agentic AI Build Week 2026.">
+<meta name="theme-color" content="#06060b">
+<link rel="canonical" href="https://incognitogeneration.com/arena/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Incognito Generation">
+<meta property="og:title" content="Elemental Arena | Incognito Generation">
+<meta property="og:description" content="Elemental Arena: a palm-sized voice puck with two lives. An AI companion that talks, feels and remembers, and a fighter that duels other players by voice. Winner, Robotics &amp; Physical AI track, Agentic AI Build Week 2026.">
+<meta property="og:url" content="https://incognitogeneration.com/arena/">
+<meta property="og:image" content="https://incognitogeneration.com/assets/studio/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/assets/studio/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/studio/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/studio/fonts/BarlowCondensed-700.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preconnect" href="https://is1-ssl.mzstatic.com">
+<link rel="stylesheet" href="/assets/ig/ig.css">
+<script src="/assets/ig/player.js" defer></script>
+<script src="/assets/ig/ig.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="nav"><div class="wrap"><div class="bar glass">
+  <a class="brand" href="/" aria-label="Incognito Generation home"><img src="/assets/studio/img/emblem.png" alt="" width="30" height="30"><span>Incognito Generation</span></a>
+  <button class="menu-btn" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><span></span><span></span><span></span></button>
+  <ul id="nav-links"><li><a href="/games/">Games</a></li><li><a href="/arena/">Arena</a></li><li><a href="/music/">Music</a></li><li><a href="/ventures/">Ventures</a></li><li><a href="/about/">About</a></li><li><a href="/contact/">Contact</a></li></ul>
+</div></div></header>
+<main id="main">
+
+<style>
+.arena-hero .stage{height:min(72vh,660px)}
+.puck{position:relative;width:min(340px,70vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 35% 25%,#3a3550,#14121f 60%,#08070d);box-shadow:inset 0 -18px 40px #000a,inset 0 6px 14px #ffffff22,0 40px 90px -20px #000,0 0 calc(30px + var(--beat)*80px) #6ff3ff55;display:grid;place-items:center;margin:auto}
+.puck::before{content:"";position:absolute;inset:-10px;border-radius:50%;background:conic-gradient(from var(--a),#ff5a1f,#38e0e0,#7fd4ff,#a9805a,#f4d92b,#2e86ff,#9b4fd6,#ff5a1f);filter:blur(14px);opacity:.55;z-index:-1;animation:ringSpin 6s linear infinite}
+@keyframes ringSpin{to{--a:360deg}}
+.puck .screen{width:58%;aspect-ratio:1;border-radius:18px;overflow:hidden;background:#000;box-shadow:0 0 0 6px #0b0a12,0 0 0 7px #ffffff22}
+.puck .screen img{width:100%;height:100%;object-fit:cover;image-rendering:pixelated}
+.puck .mic{position:absolute;bottom:9%;width:22%;height:6px;border-radius:6px;background:repeating-linear-gradient(90deg,#000 0 4px,#2a2838 4px 8px)}
+.ringwrap{position:relative;width:min(520px,86vw);aspect-ratio:1;margin:auto}
+.ringwrap .node{--r:min(210px,34vw);position:absolute;left:50%;top:50%;width:104px;height:104px;margin:-52px;border-radius:50%;display:grid;place-items:center;align-content:center;background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--c) 45%,transparent),rgba(10,10,20,.8) 70%);border:1px solid color-mix(in srgb,var(--c) 60%,transparent);transform:rotate(calc(var(--k)*60deg - 90deg)) translate(var(--r)) rotate(calc(var(--k)*-60deg + 90deg));transition:box-shadow .3s,scale .3s;color:#fff}
+.ringwrap .node i{font-style:normal;font-size:30px;filter:drop-shadow(0 0 10px var(--c))}
+.ringwrap .node b{font-family:var(--display);letter-spacing:.1em;text-transform:uppercase;font-size:13px}
+.ringwrap .node.on{scale:1.15;box-shadow:0 0 40px var(--c)}.ringwrap .node.prey{scale:.92;opacity:.65}.ringwrap .node.pred{box-shadow:0 0 0 3px #ff4d5e}
+.ringwrap svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.ringwrap .core{position:absolute;left:50%;top:50%;translate:-50% -50%;text-align:center;width:200px}
+.ringwrap .core b{font-family:var(--display);font-size:54px;line-height:1;display:block}
+.feats{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:18px}
+.feat{padding:28px}.feat .num{font-family:var(--display);font-size:42px;font-weight:700}.feat h3{font-size:26px;margin:8px 0 10px}.feat p{color:var(--ink2);font-size:16px}
+.emos{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.emo{width:118px;text-align:center;animation:bob 3.2s ease-in-out infinite;animation-delay:calc(var(--i)*-.35s)}
+.emo img{width:118px;height:118px;object-fit:contain;filter:drop-shadow(0 12px 18px #0008)}
+.emo figcaption{font-family:var(--display);letter-spacing:.14em;text-transform:uppercase;font-size:12px;color:var(--muted)}
+@keyframes bob{50%{transform:translateY(-12px) rotate(-3deg)}}
+.beasts img{transition:opacity .2s}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.float{position:absolute;width:clamp(70px,9vw,120px);animation:bob 4s ease-in-out infinite;animation-delay:calc(var(--i)*-.6s);filter:drop-shadow(0 16px 20px #000a)}
+.ranks{display:flex;gap:10px;align-items:flex-end;margin-top:24px}
+.rk{flex:1;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:28px;border-radius:14px;height:calc(50px + var(--i)*22px);background:linear-gradient(180deg,rgba(255,255,255,.14),rgba(255,255,255,.03));border:1px solid var(--line)}
+.rk:last-child{background:var(--holo);background-size:200% 100%;animation:holoShift 5s linear infinite;color:#0a0a12;box-shadow:0 0 40px #ff6fd888}
+.steps .card{padding:30px}.steps .card .n{font-family:var(--display);font-size:90px;line-height:1;font-weight:700}
+.rules{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.rules .glass{padding:24px}.rules h3{font-size:24px;margin-bottom:8px}.rules p{color:var(--ink2);font-size:16px}
+@media(max-width:700px){.rules{grid-template-columns:1fr}}
+</style>
+
+<section class="hero arena-hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="chip live" data-reveal>Winner · Agentic AI Build Week 2026</span>
+      <h1 class="h-xl" style="margin-top:18px" data-split>A creature that <span class="holo-text">talks, feels</span> and remembers.</h1>
+      <p class="lede" data-reveal style="--i:3">Elemental Arena turns a palm-sized puck into a one-of-a-kind AI companion: a conversational assistant, a storyteller, and a fighter that duels other players in real time, narrating every round out loud. Browser players fight in the same arena with no hardware at all.</p>
+      <div class="btn-row" data-reveal style="--i:4;margin-top:30px">
+        <a class="btn" href="https://arena.156.67.216.187.sslip.io/create" target="_blank" rel="noopener">Create your companion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+        <a class="btn ghost" href="/games/?wl=elemental-arena#waitlist">Join the waitlist</a>
+        <a class="btn ghost" href="#how">How it works</a>
+      </div>
+    </div>
+    <div class="stage" aria-hidden="true">
+      <div class="layer" data-depth=".4" style="left:50%;top:50%;translate:-50% -50%"><div class="puck"><div class="screen"><img src="/assets/ig/img/arena/beasts-gifs/beast1_idle.gif" alt=""></div><div class="mic"></div></div></div>
+      <div class="layer frame holo" data-depth="1.1" style="left:0;top:4%;width:30%;aspect-ratio:1"><img src="/assets/ig/img/arena/beasts-gifs/beast21_attack.gif" alt="" style="image-rendering:pixelated"></div>
+      <div class="layer frame holo" data-depth=".9" style="right:0;bottom:6%;width:30%;aspect-ratio:1"><img src="/assets/ig/img/arena/beasts-gifs/beast3_attack.gif" alt="" style="image-rendering:pixelated"></div>
+      <img class="layer" data-depth="1.5" src="/assets/ig/img/arena/companion-emotions/47-dancing.webp" alt="" style="right:4%;top:2%;width:22%">
+      <img class="layer" data-depth="1.8" src="/assets/ig/img/arena/companion-emotions/47-loving.webp" alt="" style="left:6%;bottom:2%;width:20%">
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:20px"><div class="wrap">
+  <div class="glass edge" style="padding:clamp(28px,4vw,56px)" data-reveal="zoom">
+    <div class="row2">
+      <div><span class="kicker">The win</span><h2 class="h-md" style="margin:14px 0" data-split>Winner, Robotics &amp; Physical AI track</h2>
+        <p class="lede">Agentic AI Build Week 2026 by GenAI Fund in Ho Chi Minh City, 8 to 12 July 2026, the largest buildathon held in ASEAN. Covered by Nhân Dân, VietnamPlus, CafeF and vietnam.vn.</p></div>
+      <div class="stats" style="grid-template-columns:1fr 1fr">
+        <div class="stat glass holo"><b data-count="3000" data-suffix="+">3,000+</b><span>builders</span></div>
+        <div class="stat glass holo"><b data-count="400" data-suffix="+">400+</b><span>projects</span></div>
+        <div class="stat glass holo"><b>1st</b><span>Robotics &amp; Physical AI</span></div>
+        <div class="stat glass holo"><b data-count="7">7</b><span>elements to master</span></div>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap row2">
+  <div><div class="sec-head"><span class="kicker" data-reveal>Two lives</span><h2 class="h-lg" data-split>One puck. <span class=holo-text>A friend and a fighter.</span></h2><p class=lede data-reveal style=--i:2>Say its name and it wakes up: it tells a story, runs a quiz in your language, remembers what you talked about yesterday, or looks at what you're holding. Say &quot;start a battle&quot; and the same device becomes a fighter: its beast appears on screen, an AI strategist plans each round, and it narrates the fight while your opponent's puck, across the table or across the world, narrates the other side.</p></div>
+    <ul class="list"><li>240x240 screen where the beast lives, microphone and speaker</li><li>Wake word on device, updates over WiFi, no app needed</li><li>Messages to friends: &quot;tell Frost I said hi&quot;</li><li>Camera build that can see what you're holding</li></ul></div>
+  <div data-reveal="zoom"><div class="puck" style="width:min(420px,80vw)"><div class="screen"><img src="/assets/ig/img/arena/beasts-gifs/beast6_attack.gif" alt="A beast attacking on the puck's screen"></div><div class="mic"></div></div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><span class="kicker" data-reveal>It really feels</span><h2 class="h-lg" data-split>Over 40 hand-drawn <span class=holo-text>expressions.</span></h2><p class=lede data-reveal style=--i:2>It laughs at your jokes, cries when it's sad, dances when it wins and sulks after a lost battle. You see every feeling on its face.</p></div>
+  <div class="emos" data-reveal><figure class="emo" style="--i:0"><img src="/assets/ig/img/arena/companion-emotions/47-happy.webp" alt="Companion feeling happy" loading="lazy"><figcaption>happy</figcaption></figure><figure class="emo" style="--i:1"><img src="/assets/ig/img/arena/companion-emotions/47-laughing.webp" alt="Companion feeling laughing" loading="lazy"><figcaption>laughing</figcaption></figure><figure class="emo" style="--i:2"><img src="/assets/ig/img/arena/companion-emotions/47-dancing.webp" alt="Companion feeling dancing" loading="lazy"><figcaption>dancing</figcaption></figure><figure class="emo" style="--i:3"><img src="/assets/ig/img/arena/companion-emotions/47-loving.webp" alt="Companion feeling loving" loading="lazy"><figcaption>loving</figcaption></figure><figure class="emo" style="--i:4"><img src="/assets/ig/img/arena/companion-emotions/47-silly.webp" alt="Companion feeling silly" loading="lazy"><figcaption>silly</figcaption></figure><figure class="emo" style="--i:5"><img src="/assets/ig/img/arena/companion-emotions/47-shocked.webp" alt="Companion feeling shocked" loading="lazy"><figcaption>shocked</figcaption></figure><figure class="emo" style="--i:6"><img src="/assets/ig/img/arena/companion-emotions/47-crying.webp" alt="Companion feeling crying" loading="lazy"><figcaption>crying</figcaption></figure><figure class="emo" style="--i:7"><img src="/assets/ig/img/arena/companion-emotions/47-angry.webp" alt="Companion feeling angry" loading="lazy"><figcaption>angry</figcaption></figure><figure class="emo" style="--i:8"><img src="/assets/ig/img/arena/companion-emotions/47-resting.webp" alt="Companion feeling resting" loading="lazy"><figcaption>resting</figcaption></figure></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><span class="kicker" data-reveal>Everything it can do</span><h2 class="h-lg" data-split>A companion, an assistant <span class=holo-text>and a game.</span></h2></div>
+  <div class="feats"><div class="glass holo feat" data-reveal style="--i:0" data-tilt="6"><span class="num holo-text">01</span><h3>A real AI assistant</h3><p>Ask it anything: dinosaurs, space, the time, the weather, a translation. It answers from what it knows and looks up what it doesn&#x27;t.</p></div><div class="glass holo feat" data-reveal style="--i:1" data-tilt="6"><span class="num holo-text">02</span><h3>Real conversation</h3><p>Not scripted buttons. A natural back-and-forth voice companion that listens, answers and talks like it means it.</p></div><div class="glass holo feat" data-reveal style="--i:2" data-tilt="6"><span class="num holo-text">03</span><h3>40+ emotions</h3><p>Its own animated face and voice for every feeling. It laughs, cries, dances, sulks after a loss and throws its own attack in a fight.</p></div><div class="glass holo feat" data-reveal style="--i:0" data-tilt="6"><span class="num holo-text">04</span><h3>Voice battles</h3><p>Two companions&#x27; AIs duel over spoken energy rounds. Momentum builds to elemental ultimates and sudden death decides the close ones.</p></div><div class="glass holo feat" data-reveal style="--i:1" data-tilt="6"><span class="num holo-text">05</span><h3>They notice each other</h3><p>Put two together and they talk on their own, becoming friends or rivals based on who they are and past battles.</p></div><div class="glass holo feat" data-reveal style="--i:2" data-tilt="6"><span class="num holo-text">06</span><h3>Stories, riddles and games</h3><p>A brand-new tale every time, plus riddles, quizzes, word games and songs, in its own character&#x27;s voice.</p></div><div class="glass holo feat" data-reveal style="--i:0" data-tilt="6"><span class="num holo-text">07</span><h3>Remembers and grows</h3><p>Your name, your favourites, the moments that mattered. It levels up the more you use it, and its whole self travels with it.</p></div><div class="glass holo feat" data-reveal style="--i:1" data-tilt="6"><span class="num holo-text">08</span><h3>Artifacts and ranks</h3><p>Unique serial-numbered artifacts merge into your companion: its art is reforged wearing them and it climbs from C to legendary SSS.</p></div><div class="glass holo feat" data-reveal style="--i:2" data-tilt="6"><span class="num holo-text">09</span><h3>Parents stay in control</h3><p>Pick exactly what each companion can do. Grown-up tools are off for kids by default, plus bedtime mode and topic controls.</p></div><div class="glass holo feat" data-reveal style="--i:0" data-tilt="6"><span class="num holo-text">10</span><h3>Bring your own brain</h3><p>Runs on your own AI key: your data, your model, your privacy. Fully bilingual in English and Russian, switching mid-sentence.</p></div></div>
+</div></section>
+
+<section class="hscroll" id="how" style="--n:4"><div class="pin">
+  <div class="wrap" style="margin-bottom:34px"><div class="sec-head"><span class="kicker" data-reveal>How it works</span><h2 class="h-lg" data-split>Four steps <span class=holo-text>to your companion.</span></h2></div></div>
+  <div class="rail steps">
+    <div class="card glass edge"><span class="n holo-text">01</span><h3 class="h-sm" style="margin:10px 0">Pair your puck</h3><p class="muted">One step puts Elemental Arena on the device. It shows a pairing code: type it in and the puck is yours. No puck? Play in the browser.</p><div class="frame" style="margin-top:18px;aspect-ratio:16/9"><img src="/assets/ig/img/arena/landing-desktop-1440.webp" alt="The Elemental Arena home page" loading="lazy" style="object-position:top"></div></div>
+    <div class="card glass edge"><span class="n holo-text">02</span><h3 class="h-sm" style="margin:10px 0">Summon a character</h3><p class="muted">Pick an element, a beast and a temperament. The arena forges a one-of-a-kind companion with its own art, voice, lore and signature moves.</p><div class="frame" style="margin-top:18px;aspect-ratio:16/9"><img src="/assets/ig/img/arena/create-desktop-1440.webp" alt="Creating a companion" loading="lazy" style="object-position:top"></div></div>
+    <div class="card glass edge"><span class="n holo-text">03</span><h3 class="h-sm" style="margin:10px 0">Talk, play, battle</h3><p class="muted">Ask it anything, ask for a story, or say &quot;challenge Storm&quot; and let two minds duel. Win to climb the leaderboard.</p><div class="frame" style="margin-top:18px;aspect-ratio:16/9"><img src="/assets/ig/img/arena/guide-battle-demo-desktop-1440.webp" alt="A live battle from the game's own engine" loading="lazy" style="object-position:top"></div></div>
+    <div class="card glass edge"><span class="n holo-text">04</span><h3 class="h-sm" style="margin:10px 0">Grow together</h3><p class="muted">It remembers you and levels up: Hatchling, Scout, Adventurer, Guardian, Champion, Sage, Legend.</p><div class="frame" style="margin-top:18px;aspect-ratio:16/9"><img src="/assets/ig/img/arena/shop-desktop-1440.webp" alt="The artifact shop" loading="lazy" style="object-position:top"></div></div>
+  </div>
+</div></section>
+
+<section class="sec"><div class="wrap row2">
+  <div><div class="sec-head"><span class="kicker" data-reveal>Rock, paper, scissors with six hands</span><h2 class="h-lg" data-split>Seven elements. <span class=holo-text>One ring.</span></h2><p class=lede data-reveal style=--i:2>Each element beats the next one around the circle: fire, ice, air, earth, lightning, water, then fire again. Hit someone you're strong against for x1.75 damage, someone you're weak against for x0.67. Poison is the odd one out: strong against water and earth, weak against fire and air, and nothing is strong against it.</p></div>
+    <p class="muted" data-reveal>Tap an element to see what it beats.</p></div>
+  <div class="ringwrap" data-ring data-reveal="zoom">
+    <svg viewBox="-260 -260 520 520" aria-hidden="true"><circle r="210" fill="none" stroke="url(#rg)" stroke-width="2" stroke-dasharray="6 10"/><defs><linearGradient id="rg"><stop offset="0" stop-color="#6ff3ff"/><stop offset=".5" stop-color="#a98bff"/><stop offset="1" stop-color="#ff6fd8"/></linearGradient></defs></svg>
+    <button class="node" style="--c:#ff5a1f;--k:0" data-el="fire" aria-label="Fire: beats ice"><i>🔥</i><b>fire</b></button><button class="node" style="--c:#38e0e0;--k:1" data-el="ice" aria-label="Ice: beats air"><i>❄️</i><b>ice</b></button><button class="node" style="--c:#7fd4ff;--k:2" data-el="air" aria-label="Air: beats earth"><i>🌬️</i><b>air</b></button><button class="node" style="--c:#a9805a;--k:3" data-el="earth" aria-label="Earth: beats lightning"><i>⛰️</i><b>earth</b></button><button class="node" style="--c:#f4d92b;--k:4" data-el="lightning" aria-label="Lightning: beats water"><i>⚡</i><b>lightning</b></button><button class="node" style="--c:#2e86ff;--k:5" data-el="water" aria-label="Water: beats fire"><i>🌊</i><b>water</b></button>
+    <div class="core"><b class="holo-text" data-ring-mult>x1.75</b><span class="muted" data-ring-text>Fire burns ice</span><div style="margin-top:10px"><span class="chip" style="border-color:#9b4fd6">☠️ Poison: venom, 1 damage a round for 2 rounds</span></div></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="sec-head"><span class="kicker" data-reveal>Beasts</span><h2 class="h-lg" data-split>Twenty-five beasts. <span class=holo-text>No two alike.</span></h2><p class=lede data-reveal style=--i:2>Every beast is generated: species, stats, personality, art and voice, plus a parts roll for crest, armour, natural weapon, aura, stance and eye glow. Hover a beast to see it attack.</p></div>
+  <div class="beasts" style="grid-template-columns:repeat(auto-fill,minmax(160px,1fr))" data-reveal><figure class="beast holo" data-tilt="10"><img src="/assets/ig/img/arena/beasts-gifs/beast1_idle.gif" data-attack="/assets/ig/img/arena/beasts-gifs/beast1_attack.gif" alt="Generated pixel-art beast" loading="lazy"></figure><figure class="beast holo" data-tilt="10"><img src="/assets/ig/img/arena/beasts-gifs/beast2_idle.gif" data-attack="/assets/ig/img/arena/beasts-gifs/beast2_attack.gif" alt="Generated pixel-art beast" loading="lazy"></figure><figure class="beast holo" data-tilt="10"><img src="/assets/ig/img/arena/beasts-gifs/beast3_idle.gif" data-attack="/assets/ig/img/arena/beasts-gifs/beast3_attack.gif" alt="Generated pixel-art beast" loading="lazy"></figure><figure class="beast holo" data-tilt="10"><img src="/assets/ig/img/arena/beasts-gifs/beast6_idle.gif" data-attack="/assets/ig/img/arena/beasts-gifs/beast6_attack.gif" alt="Generated pixel-art beast" loading="lazy"></figure><figure class="beast holo" data-tilt="10"><img src="/assets/ig/img/arena/beasts-gifs/beast7_idle.gif" data-attack="/assets/ig/img/arena/beasts-gifs/beast7_attack.gif" alt="Generated pixel-art beast" loading="lazy"></figure><figure class="beast holo" data-tilt="10"><img src="/assets/ig/img/arena/beasts-gifs/beast21_idle.gif" data-attack="/assets/ig/img/arena/beasts-gifs/beast21_attack.gif" alt="Generated pixel-art beast" loading="lazy"></figure></div>
+  <div class="chips" style="margin-top:26px" data-reveal><span class='chip'>dragon</span><span class='chip'>wolf</span><span class='chip'>phoenix</span><span class='chip'>kraken</span><span class='chip'>golem</span><span class='chip'>tiger</span><span class='chip'>serpent</span><span class='chip'>raven</span><span class='chip'>scorpion</span><span class='chip'>bear</span><span class='chip'>fox</span><span class='chip'>monkey</span><span class='chip'>lion</span><span class='chip'>fish</span><span class='chip'>shark</span><span class='chip'>owl</span><span class='chip'>rabbit</span><span class='chip'>turtle</span><span class='chip'>frog</span><span class='chip'>cat</span><span class='chip'>panda</span><span class='chip'>deer</span><span class='chip'>octopus</span><span class='chip'>hawk</span><span class='chip'>lizard</span></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap row2 rev">
+  <div class="pip" data-reveal="zoom"><div class="main frame holo" data-tilt="5"><img src="/assets/ig/img/arena/guide-battle-demo-desktop-1440.webp" alt="A battle played live by the game's engine" loading="lazy" style="object-position:top"></div><div class="inset frame holo" data-depth=".6" style="aspect-ratio:1;width:34%"><img src="/assets/ig/img/arena/beasts-gifs/beast7_attack.gif" alt="" style="image-rendering:pixelated"></div></div>
+  <div><div class="sec-head"><span class="kicker" data-reveal>The Momentum Duel</span><h2 class="h-md" data-split>Plan together. <span class=holo-text>Strike together.</span></h2><p class=lede data-reveal style=--i:2>Both players plan at the same time. By voice you just say &quot;start a battle&quot; and the AI strategist plans and narrates every round.</p></div>
+    <div class="rules">
+      <div class="glass holo" data-tilt="5"><h3>Energy</h3><p>Every round each creature spends energy on attacks and guards. More energy, harder hit. Swift fighters get more, tough ones get more health.</p></div>
+      <div class="glass holo" data-tilt="5"><h3>Guards</h3><p>A guard softens a hit, never by more than three quarters. At least 1 damage always gets through.</p></div>
+      <div class="glass holo" data-tilt="5"><h3>Momentum</h3><p>Clean hits fill the bar. At 100 your creature fires its Ultimate by itself, for about double damage.</p></div>
+      <div class="glass holo" data-tilt="5"><h3>Sudden death</h3><p>Nobody goes home with a draw. Past the round cap both drop to 6 health and the next clean hit ends it.</p></div>
+    </div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap row2">
+  <div><div class="sec-head"><span class="kicker" data-reveal>Realm, artifacts and ranks</span><h2 class="h-lg" data-split>Collect. Merge. <span class=holo-text>Ascend.</span></h2><p class=lede data-reveal style=--i:2>Your companion lives in a realm shaped by its element. Fifty-four things to find: wearables that become part of your companion forever when merged, its art redrawn wearing them, and artifacts that turn its land into a home. Ranks climb from C to legendary SSS, and the bonus is deliberately small: buying things never simply buys wins.</p></div>
+    <div class="ranks" data-reveal><div class='rk' style='--i:0'>C</div><div class='rk' style='--i:1'>B</div><div class='rk' style='--i:2'>A</div><div class='rk' style='--i:3'>S</div><div class='rk' style='--i:4'>SS</div><div class='rk' style='--i:5'>SSS</div></div></div>
+  <div style="position:relative" data-reveal="zoom"><div style="display:grid;grid-template-columns:1fr 1fr;gap:14px"><div class="frame holo" data-tilt="8" style="aspect-ratio:1"><img src="/assets/ig/img/arena/realm-tiles/home_volcano.png" alt="volcano realm" loading="lazy" style="image-rendering:pixelated"></div><div class="frame holo" data-tilt="8" style="aspect-ratio:1"><img src="/assets/ig/img/arena/realm-tiles/home_ice.png" alt="ice realm" loading="lazy" style="image-rendering:pixelated"></div><div class="frame holo" data-tilt="8" style="aspect-ratio:1"><img src="/assets/ig/img/arena/realm-tiles/home_sea.png" alt="sea realm" loading="lazy" style="image-rendering:pixelated"></div><div class="frame holo" data-tilt="8" style="aspect-ratio:1"><img src="/assets/ig/img/arena/realm-tiles/home_forest.png" alt="forest realm" loading="lazy" style="image-rendering:pixelated"></div></div><div style="position:absolute;inset:0;pointer-events:none"><img src="/assets/ig/img/arena/items/party_hat.png" alt="party hat" class="float" style="--i:0" loading="lazy"><img src="/assets/ig/img/arena/items/starlight_halo.png" alt="starlight halo" class="float" style="--i:1" loading="lazy"><img src="/assets/ig/img/arena/items/star_scepter.png" alt="star scepter" class="float" style="--i:2" loading="lazy"><img src="/assets/ig/img/arena/items/robo_helper.png" alt="robo helper" class="float" style="--i:3" loading="lazy"><img src="/assets/ig/img/arena/items/hot_spring.png" alt="hot spring" class="float" style="--i:4" loading="lazy"><img src="/assets/ig/img/arena/items/wise_tree.png" alt="wise tree" class="float" style="--i:5" loading="lazy"></div></div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="bento">
+    <div class="glass edge t-6" style="padding:34px" data-reveal><span class="kicker">For parents</span><h3 class="h-sm" style="margin:12px 0">Parents stay in control</h3><ul class="list"><li>Pick exactly what each companion can do; unchecked abilities are hidden entirely</li><li>Email, messaging and calendar are off for kids by default</li><li>Bedtime mode: it speaks softly, offers sleepy stories and won't start chats</li><li>Topic controls</li></ul></div>
+    <div class="glass edge t-6" style="padding:34px" data-reveal style="--i:1"><span class="kicker">Privacy</span><h3 class="h-sm" style="margin:12px 0">Bring your own brain</h3><ul class="list"><li>Runs on your own AI key: OpenAI, Anthropic, Gemini or open-source models</li><li>Your data, your model, your privacy</li><li>Fully bilingual in English and Russian, switching mid-sentence</li><li>A new bedtime story every night, in its own voice</li></ul></div>
+  </div>
+</div></section>
+
+<section class="sec" style="padding-top:0"><div class="wrap">
+  <div class="glass edge" style="padding:clamp(30px,5vw,70px);text-align:center" data-reveal="zoom">
+    <span class="kicker">Meet yours first</span>
+    <h2 class="h-lg" style="margin:18px 0" data-split>Summon your companion.</h2>
+    <p class="lede" style="margin:0 auto 30px">Play in the browser today. The puck hardware is being finished: join the waitlist to be first in line.</p>
+    <div class="btn-row" style="justify-content:center"><a class="btn" href="https://arena.156.67.216.187.sslip.io/create" target="_blank" rel="noopener">Create your companion <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="btn ghost" href="/games/?wl=elemental-arena#waitlist">Join the waitlist</a><a class="btn ghost" href="https://arena.156.67.216.187.sslip.io/guide" target="_blank" rel="noopener">Read the guide</a><a class="btn ghost" href="https://arena.156.67.216.187.sslip.io/flash" target="_blank" rel="noopener">I already have a puck</a></div>
+  </div>
+</div></section>
+</main>
+<footer class="foot">
+  <div class="wrap">
+    <div class="word" aria-hidden="true">Incognito Generation</div>
+    <div class="cols">
+      <div><a class="brand" href="/"><img src="/assets/studio/img/emblem.png" alt="" width="30" height="30"><span>Incognito Generation</span></a>
+        <p class="muted" style="margin-top:14px;max-width:34ch">An independent game and music studio, founded by Khidayotullo Salakhitdinov and Viacheslav Zhovtenko.</p>
+        <p style="margin-top:10px"><a href="mailto:info@incognitogeneration.com">info@incognitogeneration.com</a></p>
+        <div class="socials"><a href="https://www.youtube.com/@incognitogeneration" target="_blank" rel="noopener" aria-label="Incognito Generation on YouTube"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z"/></svg></a><a href="https://music.apple.com/us/artist/incognito-generation/1588064683" target="_blank" rel="noopener" aria-label="Incognito Generation on Apple Music"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16.4 12.7c0-2.3 1.9-3.4 2-3.5-1.1-1.6-2.8-1.8-3.4-1.8-1.4-.15-2.8.85-3.5.85-.7 0-1.9-.83-3.1-.8-1.6.02-3 .93-3.8 2.36-1.6 2.8-.4 7 1.2 9.3.8 1.1 1.7 2.4 2.9 2.3 1.2-.05 1.6-.75 3-.75s1.8.75 3 .73c1.3-.02 2.1-1.14 2.8-2.27.9-1.3 1.3-2.6 1.3-2.65-.03-.01-2.5-.95-2.5-3.77zM14.2 5.9c.64-.78 1.07-1.85.95-2.9-.92.04-2.03.6-2.7 1.38-.6.68-1.12 1.77-.98 2.82 1.03.08 2.08-.52 2.73-1.3z"/></svg></a><a href="https://x.com/incoggeneration" target="_blank" rel="noopener" aria-label="Incognito Generation on X"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.8 3h3.1l-6.8 7.8L22 21h-6.2l-4.9-6.4L5.3 21H2.2l7.3-8.3L1.9 3h6.4l4.4 5.8zm-1.1 16.2h1.7L7.4 4.7H5.6z"/></svg></a></div></div>
+      <div><h4>Games</h4><ul><li><a href="/games/#final-stand">Final Stand</a></li><li><a href="/arena/">Elemental Arena</a></li><li><a href="/games/#slicing-life">Slicing Life</a></li><li><a href="/games/#springbound">Springbound</a></li><li><a href="/games/#little-secrets">Little Secrets</a></li><li><a href="/games/#pose-runner">Pose Runner</a></li><li><a href="/games/#krai">K.R.A.I</a></li></ul></div>
+      <div><h4>Music</h4><ul><li><a href="/music/">Albums and singles</a></li><li><a href="/music/#videos">Music videos</a></li><li><a href="https://music.apple.com/us/artist/incognito-generation/1588064683" target="_blank" rel="noopener">Apple Music</a></li><li><a href="https://www.youtube.com/@incognitogeneration" target="_blank" rel="noopener">YouTube</a></li></ul></div>
+      <div><h4>Studio</h4><ul><li><a href="/about/">About</a></li><li><a href="/ventures/">Ventures</a></li><li><a href="/contact/">Contact</a></li><li><a href="/press/">Press kit</a></li><li><a href="/finalstand/">Final Stand support</a></li></ul></div>
+    </div>
+    <p class="legal">&copy; 2026 Incognito Generation. All games, music and artwork are the property of Incognito Generation and their respective creators.</p>
+  </div>
+</footer>
+</body>
+</html>
