@@ -266,9 +266,23 @@ def page_home():
 <section class="sec" style="padding-top:0">
   <div class="wrap">
     {sec_head("The founders", "Two founders. <span class=holo-text>Two companies.</span> One studio.")}
-    <div class="bento">
-      <a class="tile holo t-6 tall" href="/about/#xidik" data-tilt="5"><div class="bg"><img src="/assets/ig/img/people/xidik.jpg" alt="" style="object-position:50% 20%"></div><span class="chip">Co-founder · Founder & CEO, PharmKulen</span><h3>Khidayotullo Salakhitdinov</h3><p>Builds the studio's games end to end. ASEAN Outstanding Visionary Leader 2026.</p><span class="go">{ICON['arrow']}</span></a>
-      <a class="tile holo t-6 tall" href="/about/#slava" data-tilt="5"><div class="bg">{f'<img src="{SLAVA_PHOTO}" alt="">' if SLAVA_PHOTO else '<img src="/assets/ig/img/krai/kyiv-river-district.webp" alt="">'}</div><span class="chip">Co-founder · Founder & CEO, MiyZapis</span><h3>Viacheslav Zhovtenko</h3><p>Wrote all of our music, designs and animates our characters, and is building K.R.A.I.</p><span class="go">{ICON['arrow']}</span></a>
+    <div class="founders">
+      <a class="founder glass edge holo" href="/about/#xidik" data-tilt="5" data-reveal>
+        <div class="ring"><img src="/assets/ig/img/people/xidik.jpg" alt="Khidayotullo Salakhitdinov" style="object-position:50% 22%"></div>
+        <div class="fi"><span class="kicker">Co-founder</span><h3>Khidayotullo Salakhitdinov</h3>
+          <div class="roles"><span class="chip">Founder &amp; CEO, PharmKulen</span><span class="chip">Games &amp; engineering</span></div>
+          <p>Builds the studio's games end to end, from prototype to store page. Built Elemental Arena, the Robotics &amp; Physical AI track winner at Agentic AI Build Week 2026.</p>
+          <div class="mini"><span><b>2026</b>ASEAN Outstanding Visionary Leader</span><span><b>2026</b>Best Startup, PharmKulen</span></div>
+          <span class="more">Read more {ICON['arrow']}</span></div>
+      </a>
+      <a class="founder glass edge holo" href="/about/#slava" data-tilt="5" data-reveal style="--i:1">
+        <div class="ring"><img src="{SLAVA_PHOTO}" alt="Viacheslav Zhovtenko" style="object-position:40% 35%"></div>
+        <div class="fi"><span class="kicker">Co-founder</span><h3>Viacheslav Zhovtenko</h3>
+          <div class="roles"><span class="chip">Founder &amp; CEO, MiyZapis</span><span class="chip">Music &amp; characters</span></div>
+          <p>Wrote all of the studio's music, every album and single since 2021, helps design and animate our characters, and is building K.R.A.I.</p>
+          <div class="mini"><span><b>54</b>tracks released</span><span><b>4</b>albums</span></div>
+          <span class="more">Read more {ICON['arrow']}</span></div>
+      </a>
     </div>
   </div>
 </section>

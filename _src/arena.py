@@ -3,7 +3,7 @@ waitlist, guide, setup and shop pages. Play/sign-up links go to the live app."""
 import html
 esc = html.escape
 
-LIVE = "https://arena.156.67.216.187.sslip.io"
+LIVE = "https://arena.incognitogeneration.com"
 DESC = "Elemental Arena: a palm-sized voice puck with two lives. An AI companion that talks, feels and remembers, and a fighter that duels other players by voice. Winner, Robotics & Physical AI track, Agentic AI Build Week 2026."
 HEAD = ""
 A = "/assets/ig/img/arena/"
